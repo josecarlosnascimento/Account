@@ -1,6 +1,6 @@
 create table users (
-id bigint  PRIMARY KEY auto_increment,
+id SERIAL,
 password varchar(255),
-role tinyint check (role between 0 and 1),
+role INT check (role between 0 and 1),
 username varchar(255)
 )

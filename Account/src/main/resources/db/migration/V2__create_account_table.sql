@@ -1,5 +1,5 @@
 create table contas (
-id bigint  PRIMARY KEY auto_increment,
+id SERIAL,
 descricao varchar(255),
 data_vencimento date,
 data_pagamento date,
