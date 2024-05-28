@@ -32,7 +32,7 @@ public class AuthenticationController {
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid Authentication authentication){
+    public ResponseEntity<LoginResponse> login(@RequestBody @Valid Authentication authentication){
         var userNamePassword = new UsernamePasswordAuthenticationToken(authentication.username(), authentication.password());
         var auth  = authenticationManager.authenticate(userNamePassword);
         var token = tokenService.tokenGenerate((Users) auth.getPrincipal());
@@ -40,7 +40,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid Register register){
+    public ResponseEntity<String> register(@RequestBody @Valid Register register){
         var user =  userRepository.findByUsername(register.username());
 
         if(user.isPresent()){
@@ -49,7 +49,7 @@ public class AuthenticationController {
 
         String encryptedPass = new BCryptPasswordEncoder().encode(register.password());
         Users users = new Users(register.username(), encryptedPass, register.role());
-        var userSave = this.userRepository.save(users);
-        return ResponseEntity.ok().build();
+        this.userRepository.save(users);
+        return ResponseEntity.ok("Usuario salvo com sucesso.");
     }
 }

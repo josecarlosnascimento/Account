@@ -1,20 +1,8 @@
 package br.com.jcnsc.account.usecase.account;
 
-import br.com.jcnsc.account.application.http.exception.NotFoundException;
-import br.com.jcnsc.account.application.http.facade.AccountRequest;
-import br.com.jcnsc.account.application.http.facade.AccountResponse;
-import br.com.jcnsc.account.application.http.mapper.AccountMapper;
-import br.com.jcnsc.account.application.repository.AccountRepository;
-import br.com.jcnsc.account.application.repository.CreditorRepository;
-import br.com.jcnsc.account.application.repository.impl.AccountRepositoryImpl;
-import br.com.jcnsc.account.domain.Account;
-import br.com.jcnsc.account.domain.Creditor;
-import br.com.jcnsc.account.domain.Situation;
-import br.com.jcnsc.account.usecase.AccountUseCase;
-import br.com.jcnsc.account.usecase.CreditorUseCase;
-import br.com.jcnsc.account.usecase.data.AccountData;
-import br.com.jcnsc.account.usecase.data.CreditorData;
-import jakarta.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -22,21 +10,22 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import br.com.jcnsc.account.application.http.mapper.AccountMapper;
+import br.com.jcnsc.account.application.repository.AccountRepository;
+import br.com.jcnsc.account.application.repository.CreditorRepository;
+import br.com.jcnsc.account.application.repository.impl.AccountRepositoryImpl;
+import br.com.jcnsc.account.domain.Account;
+import br.com.jcnsc.account.domain.Situation;
+import br.com.jcnsc.account.usecase.AccountUseCase;
+import br.com.jcnsc.account.usecase.CreditorUseCase;
+import br.com.jcnsc.account.usecase.data.AccountData;
+import br.com.jcnsc.account.usecase.data.CreditorData;
 
 @SpringBootTest
 public class AccountUseCaseTest {
@@ -83,24 +72,24 @@ public class AccountUseCaseTest {
     @Test
     void mustInsertAnAccount(){
 
-        var account = AccountData.account11();
+        var account11 = AccountData.account11();
         var accountRequest = AccountData.accountRequest();
 
         Mockito.when(creditorRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(CreditorData.creditor1()));
-        Mockito.when(accountRepository.save(Mockito.any(Account.class))).thenReturn(AccountData.account11());
+        Mockito.when(accountRepository.save(Mockito.any(Account.class))).thenReturn(account11);
 
         var accountModel = accountUseCase.insert(accountRequest);
 
-        Assertions.assertEquals(11L, account.getId());
+        Assertions.assertEquals(11L, accountModel.id());
     }
 
     @Test
     void mustUpdateAnAccount(){
-        var account = AccountData.account1();
+        var account1 = AccountData.account1();
         var accountRequest = AccountData.accountRequest();
 
-        Mockito.when(accountRepository.findById(1L)).thenReturn(Optional.of(AccountData.account1()));
-        Mockito.when(accountRepository.save(Mockito.any(Account.class))).thenReturn(AccountData.account1());
+        Mockito.when(accountRepository.findById(1L)).thenReturn(Optional.of(account1));
+        Mockito.when(accountRepository.save(Mockito.any(Account.class))).thenReturn(account1);
 
         var accountModel = accountUseCase.update(1L, accountRequest);
 
@@ -110,13 +99,9 @@ public class AccountUseCaseTest {
     @Test
     void mustUpdateStatusFromAnAccount(){
 
-        var account = AccountData.account1();
-        var accountRequest = AccountData.accountRequest();
-
-        Mockito.when(accountRepository.findById(1L)).thenReturn(Optional.of(AccountData.account1()));
-
+        var account1 = AccountData.account1();
+        Mockito.when(accountRepository.findById(1L)).thenReturn(Optional.of(account1));
         var accountModel = accountUseCase.updateStatus(1L, Situation.PAGA);
-
         Assertions.assertEquals(1L, accountModel.id());
     }
 

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 public record Register(
         @NotBlank(message = "Informe o username.")
         String username,
+        
         @NotBlank(message = "Informe a senha.")
         String password,
 

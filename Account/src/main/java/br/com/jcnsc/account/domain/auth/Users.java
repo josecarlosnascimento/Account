@@ -18,7 +18,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Users implements UserDetails {
 
-    @Id
+	private static final long serialVersionUID = -8467351049044936165L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

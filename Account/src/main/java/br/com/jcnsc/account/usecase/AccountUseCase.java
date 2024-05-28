@@ -34,9 +34,6 @@ public class AccountUseCase {
     private CreditorRepository creditorRepository;
 
     @Autowired
-    private CreditorUseCase creditorUseCase;
-
-    @Autowired
     private AccountMapper accountMapper;
 
     public Page<AccountResponse> findAll(Pageable pageable){
@@ -59,7 +56,9 @@ public class AccountUseCase {
 
     public AccountResponse insert(AccountRequest accountRequest){
 
-        var creditor = creditorRepository.findById(accountRequest.creditor().id()).get();
+        var creditor = creditorRepository.findById(accountRequest.creditor().id())
+        		.orElseThrow(() -> new NotFoundException("Credor não existe."));
+        
         var account = accountMapper.toAccount(accountRequest);
         account.setCreditor(creditor);
         var accountModel = accountRepository.save(account);
@@ -70,26 +69,21 @@ public class AccountUseCase {
 
     public AccountResponse update(Long id,  AccountRequest accountRequest)  {
 
-        var currentAccount = accountRepository.findById(id);
+        var currentAccount = accountRepository.findById(id)
+        		.orElseThrow(() -> new NotFoundException("Conta não existe."));
 
-        if(currentAccount.isPresent()){
-            Account account = currentAccount.get();
+            BeanUtils.copyProperties(accountRequest, currentAccount);
 
-            BeanUtils.copyProperties(accountRequest, account);
-
-            Account accountModel =  accountRepository.save(account);
+            Account accountModel =  accountRepository.save(currentAccount);
             var accountResponse = accountMapper.toAccountResponse(accountModel);
             return accountResponse;
-        }
-        throw new NotFoundException("Conta nao encontrada");
     }
 
     @Transactional
     public AccountResponse updateStatus(Long id, Situation situation)  {
 
-        var currentAccount = accountRepository.findById(id);
-
-        if(currentAccount.isPresent()){
+        var currentAccount = accountRepository.findById(id)
+        		.orElseThrow(() -> new NotFoundException("Conta não existe."));
 
             if(situation.name().equals(Situation.PAGA.name())){
                 accountRepository.updateToPaga(id);
@@ -97,11 +91,7 @@ public class AccountUseCase {
                 accountRepository.updateToPendente(id);
             }
 
-            Account account = currentAccount.get();
-            var accountResponse = accountMapper.toAccountResponse(account);
-            return accountResponse;
-        }
-        throw new NotFoundException("Conta nao encontrada");
+            return accountMapper.toAccountResponse(currentAccount);
     }
 
     public BigDecimal sumValuePaid(LocalDate dtIni, LocalDate dtFim){

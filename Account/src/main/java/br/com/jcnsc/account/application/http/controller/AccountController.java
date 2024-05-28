@@ -1,26 +1,31 @@
 package br.com.jcnsc.account.application.http.controller;
 
-import br.com.jcnsc.account.application.http.facade.AccountRequest;
-import br.com.jcnsc.account.application.http.facade.AccountResponse;
-import br.com.jcnsc.account.application.http.facade.SumResponse;
-import br.com.jcnsc.account.domain.Account;
-import br.com.jcnsc.account.domain.Situation;
-import br.com.jcnsc.account.usecase.AccountUseCase;
-import br.com.jcnsc.account.usecase.CSVUseCase;
-import br.com.jcnsc.account.utils.CSVHelper;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import jakarta.websocket.server.PathParam;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
-import java.util.List;
+import br.com.jcnsc.account.application.http.facade.AccountRequest;
+import br.com.jcnsc.account.application.http.facade.AccountResponse;
+import br.com.jcnsc.account.application.http.facade.SumResponse;
+import br.com.jcnsc.account.domain.Situation;
+import br.com.jcnsc.account.usecase.AccountUseCase;
+import br.com.jcnsc.account.usecase.CSVUseCase;
+import br.com.jcnsc.account.utils.CSVHelper;
+import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/account")
@@ -86,5 +91,4 @@ public class AccountController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Falha ao importar arquivo.");
     }
-
 }

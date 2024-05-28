@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record AccountResponse (
-
         @JsonProperty("id")
         Long id,
 

@@ -14,7 +14,7 @@ public class Creditor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String name;
 
     @Column(name = "cpf_cnpj")

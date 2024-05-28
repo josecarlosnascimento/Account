@@ -34,14 +34,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/creditor",
-							"protocol": "http",
+							"raw": "{{URL}}creditor",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"creditor"
+								"{{URL}}creditor"
 							]
 						}
 					},
@@ -75,14 +70,9 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/creditor",
-							"protocol": "http",
+							"raw": "{{URL}}creditor",
 							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"creditor"
+								"{{URL}}creditor"
 							]
 						}
 					},
@@ -99,7 +89,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhY2NvdW50LWFwaSIsInN1YiI6ImpjYXJsb3MiLCJleHAiOjE3MTY1MjYyMjV9.LWE-wrVGtWY19Gf5eDxxLG3-e03Zgvi8QI2ZUx0G0qE",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -116,14 +106,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/creditor/23",
-							"protocol": "http",
+							"raw": "{{URL}}creditor/23",
 							"host": [
-								"localhost"
+								"{{URL}}creditor"
 							],
-							"port": "8080",
 							"path": [
-								"creditor",
 								"23"
 							]
 						}
@@ -265,7 +252,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/account/sum?dataInicio=2023-05-28&dataFim=2023-05-28",
+							"raw": "http://localhost:8080/account/sum?startDate=2023-05-28&startEnd=2023-05-28",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -277,11 +264,11 @@
 							],
 							"query": [
 								{
-									"key": "dataInicio",
+									"key": "startDate",
 									"value": "2023-05-28"
 								},
 								{
-									"key": "dataFim",
+									"key": "startEnd",
 									"value": "2023-05-28"
 								}
 							]
@@ -375,7 +362,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhY2NvdW50LWFwaSIsInN1YiI6ImpjYXJsb3MiLCJleHAiOjE3MTY2MTY4NjV9.6xMx5rJjb5ZzJ4k3DeABhBW9bPSaJDofz6oZFd7znQY",
+									"value": "{{TOKEN}}",
 									"type": "string"
 								}
 							]
@@ -483,14 +470,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/auth/login",
-					"protocol": "http",
+					"raw": "{{URL}}auth/login",
 					"host": [
-						"localhost"
+						"{{URL}}auth"
 					],
-					"port": "8080",
 					"path": [
-						"auth",
 						"login"
 					]
 				}
@@ -512,14 +496,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/auth/register",
-					"protocol": "http",
+					"raw": "{{URL}}auth/register",
 					"host": [
-						"localhost"
+						"{{URL}}auth"
 					],
-					"port": "8080",
 					"path": [
-						"auth",
 						"register"
 					]
 				}

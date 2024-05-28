@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record AccountRequest(
-
         @JsonProperty("data_vencimento")
         LocalDate expireDate,
 

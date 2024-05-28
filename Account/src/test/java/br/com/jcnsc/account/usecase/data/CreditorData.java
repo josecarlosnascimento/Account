@@ -1,13 +1,9 @@
 package br.com.jcnsc.account.usecase.data;
 
-import br.com.jcnsc.account.application.http.facade.CreditorRequest;
-import br.com.jcnsc.account.domain.Account;
-import br.com.jcnsc.account.domain.Creditor;
-import br.com.jcnsc.account.domain.Situation;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
+
+import br.com.jcnsc.account.application.http.facade.CreditorRequest;
+import br.com.jcnsc.account.domain.Creditor;
 
 public class CreditorData {
 

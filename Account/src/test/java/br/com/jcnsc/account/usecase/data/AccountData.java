@@ -1,16 +1,12 @@
 package br.com.jcnsc.account.usecase.data;
 
-import br.com.jcnsc.account.application.http.facade.AccountRequest;
-import br.com.jcnsc.account.application.http.facade.AccountResponse;
-import br.com.jcnsc.account.domain.Account;
-import br.com.jcnsc.account.domain.Creditor;
-import br.com.jcnsc.account.domain.Situation;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+
+import br.com.jcnsc.account.application.http.facade.AccountRequest;
+import br.com.jcnsc.account.domain.Account;
+import br.com.jcnsc.account.domain.Situation;
 
 public class AccountData {
 
