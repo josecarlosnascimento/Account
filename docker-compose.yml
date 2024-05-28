@@ -1,0 +1,29 @@
+version: '3.4'
+services:
+    postgres:
+        image: postgres
+        environment:
+            POSTGRES_PASSWORD: "!mYLittleAccount"
+    ports:
+      - "5432:5432"
+    account-app:
+        image: account-app
+        restart: always
+        build:
+            context: .
+            dockerfile: app/Dockerfile
+        working_dir: /app
+        environment:
+            TZ: America/Sao_Paulo
+        ports:
+           - "8080:8080"
+        command: mvn spring-boot:run
+        links:
+           - db
+        depends_on:
+           - db
+        networks:
+            - account-network
+networks:
+    account-network:
+        driver: bridge
