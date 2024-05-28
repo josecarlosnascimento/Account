@@ -9,10 +9,6 @@ services:
     account-app:
         image: account-app
         restart: always
-        build:
-          context: .
-          dockerfile: Account/Dockerfile
-        working_dir: /Account
         environment:
           TZ: America/Sao_Paulo
         ports:
