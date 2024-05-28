@@ -6,8 +6,8 @@ services:
           POSTGRES_PASSWORD: "!mYLittleAccount"
         ports:
           - "5432:5432"
-    account-app:
-        image: account-app
+    account:
+        image: account
         restart: always
         environment:
           TZ: America/Sao_Paulo
