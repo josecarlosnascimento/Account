@@ -10,4 +10,3 @@ Neste repositório podemos encontrar alguns auxiliares para nosso sistema.
 
 - Temos uma documentação do Swagger também rodando no ambiente AWS e Local. <p/>
   [Swagger Local](http://localhost:8080/swagger-ui/index.html#/) <p/>
-  [Swagger AWS](http://localhost:8080/swagger-ui/index.html#/)
